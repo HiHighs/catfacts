@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./src/img/favicon.ico" type="image/x-icon">
+    <link rel='stylesheet' href='./src/css/main.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script defer type='module' src='./src/js/controller.ts'></script>
+    <title>Cat Facts</title>
+</head>
+<body>
+    <div class="fact-container">
+        <i class="cat-icon fas fa-cat"></i>
+        <h1>Cat Fact</h1>
+        <p class="cat-fact">Click the button to generate a cat fact!</p>
+        <button class="generate-fact-btn btn">Generate Fact</button>
+        <button class="save-fact-btn disabled-btn btn" disabled>Save to My Facts</button>
+    </div>
+
+    <button class="my-facts-btn btn">My Cat Facts</button>
+
+    <div class="popup-container">
+        <div class="popup-content">
+            <span class="close-popup fas fa-cat"></span>
+            <h2>My Cat Facts</h2>
+            <ul class="saved-facts-list">
+                <!-- Saved facts will be dynamically added here -->
+            </ul>
+            <button class="clear-facts-btn">Clear</button>
+        </div>
+    </div>
+
+</body>
+</html>
