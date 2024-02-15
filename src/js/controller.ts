@@ -1,11 +1,15 @@
 import * as model from './model';
 import view from './view';
 
-function controlGenerateFact(): void {
-    // Execute render as callback to make sure the async function has completed
-    model.generateFact(() => {
+async function controlGenerateFact(): Promise<void> {
+    try {
+        view.toggleSpinner();
+        await model.generateFact();
         view.renderFact(model.state.fact);
-    });
+        view.toggleSpinner();
+    } catch(err) {
+        view.renderError();
+    }
 }
 
 function controlSaveFact(): void {

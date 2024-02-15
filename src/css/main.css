@@ -146,3 +146,27 @@ h2 {
 .saved-facts-list li:last-child {
     border-bottom: none; /* Remove border for the last item */
 }
+
+.hidden {
+    display: none;
+}
+
+.error-message {
+    color: #ff0000; /* Red color for error messages */
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.spinner {
+    animation: rotate 0.1s infinite linear;
+}
+
+@keyframes rotate {
+    0% {
+      transform: rotate(0);
+    }
+  
+    100% {
+      transform: rotate(360deg);
+    }
+}

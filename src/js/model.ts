@@ -5,14 +5,15 @@ export const state = {
     saved: [] as string[],
 }
 
-export async function generateFact(callback: Function): Promise<void> {
-
-    const data = await fetch(API_URL);
-    const fact = await data.json();
-
-    state.fact = fact.data[0];
-
-    if(callback) callback();
+export async function generateFact(): Promise<void> {
+    try {
+        const data = await fetch(API_URL);
+        const fact = await data.json();
+    
+        state.fact = fact.data[0];
+    } catch(err) {
+        throw err;
+    }
 }
 
 export function saveFact(): void {

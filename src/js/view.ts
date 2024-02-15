@@ -10,6 +10,7 @@ class View {
     _closePopup: HTMLElement = document.querySelector('.close-popup') as HTMLElement;
     _savedFacts: HTMLElement = document.querySelector('.saved-facts-list') as HTMLElement;
     _clearBtn: HTMLButtonElement = document.querySelector('.clear-facts-btn') as HTMLButtonElement;
+    _errorMessage: HTMLElement = document.querySelector('.error-message') as HTMLElement;
 
     _i: number = 0;
 
@@ -28,6 +29,7 @@ class View {
             this._popup.style.display = 'none';
         })
         
+        // Close popup on ESC
         document.addEventListener('keydown', e => {
             if(e.key === 'Escape')
                 this._popup.style.display = 'none';
@@ -41,13 +43,33 @@ class View {
 
     // Show saved facts on screen
     renderSavedFacts(facts: string[]): void {
-        console.log(facts);
         // Empty list
         this._savedFacts.innerHTML = '';
-        // Render facts
-        facts.forEach(fact => {
-            this._savedFacts.insertAdjacentHTML('beforeend', `<li>${fact}</li>`);
-        })
+
+        // If no saved facts show message
+        if(facts.length === 0) {
+            this._clearBtn.disabled = true;
+            this._savedFacts.insertAdjacentHTML('beforeend', '<li>No facts saved yet!</li>');
+        } 
+
+        // Else render facts
+        else {
+            this._clearBtn.disabled = false;
+            facts.forEach(fact => {
+                this._savedFacts.insertAdjacentHTML('beforeend', `<li>${fact}</li>`);
+            })
+        }
+    }
+
+    // Show error message
+    renderError(): void {
+        this._catFact.classList.add('hidden');
+        this._errorMessage.classList.remove('hidden');
+    }
+
+    hideError(): void {
+        this._errorMessage.classList.add('hidden');
+        this._catFact.classList.remove('hidden');
     }
 
     // Generate new fact
@@ -64,8 +86,8 @@ class View {
     // Add current fact
     addHandlerSaveFact(handler: Function) {
         this._saveBtn.addEventListener('click', () => {
-            handler();
-            console.log(SAVE)
+            handler();            
+            // Make save fact button inactive
             this._saveBtn.textContent = SAVED;
             this._saveBtn.classList.add('disabled-btn');
             this._saveBtn.disabled = true;
@@ -74,7 +96,6 @@ class View {
 
     // Show saved facts
     addHandlerShowSavedFacts(handler: Function) {
-        // Show facts
         this._factsBtn.addEventListener('click', () => {
             this._popup.style.display = 'flex';
             handler();
@@ -87,6 +108,11 @@ class View {
             this._savedFacts.textContent = '';
             handler();
         })
+    }
+
+    // Toggle spinner
+    toggleSpinner(): void {
+        this._catIcon.classList.toggle('spinner');
     }
 }
 
